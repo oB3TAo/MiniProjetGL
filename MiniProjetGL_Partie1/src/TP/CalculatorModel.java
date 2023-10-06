@@ -15,8 +15,9 @@ public class CalculatorModel {
  // Méthode pour effectuer une opération d'addition
  public void add() {
      if (!operandStack.isEmpty()) {
-         double operand = operandStack.pop();
-         accumulator += operand;
+         double operand1 = operandStack.pop();
+         double operand2 = operandStack.pop();
+         accumulator = operand1 + operand2;
      }
  }
 
@@ -43,7 +44,7 @@ public class CalculatorModel {
          if (operand != 0) {
              accumulator /= operand;
          } else {
-             // Gérer la division par zéro ici si nécessaire
+             accumulator=0;
          }
      }
  }
