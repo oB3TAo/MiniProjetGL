@@ -1,4 +1,4 @@
-//Clément GABON et Loïc Lainé
+//Clément GABON et Loïc Lainé TP de Génie logiciel
 package TP;
 
 public class CalculatorMain {
