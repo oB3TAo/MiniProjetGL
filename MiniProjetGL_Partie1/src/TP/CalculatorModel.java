@@ -8,7 +8,7 @@ public class CalculatorModel {
  private Stack<Double> operandStack; // La pile d'opérandes
 
  public CalculatorModel() {
-     accumulator = 0.0;
+	 accumulator=0.0;
      operandStack = new Stack<>();
  }
 
@@ -17,34 +17,42 @@ public class CalculatorModel {
      if (!operandStack.isEmpty()) {
          double operand1 = operandStack.pop();
          double operand2 = operandStack.pop();
-         accumulator = operand1 + operand2;
+         operandStack.push(operand1 + operand2);
+         accumulator=operand1 + operand2;
      }
  }
 
  // Méthode pour effectuer une opération de soustraction
  public void subtract() {
      if (!operandStack.isEmpty()) {
-         double operand = operandStack.pop();
-         accumulator -= operand;
+         double operand1 = operandStack.pop();
+         double operand2 = operandStack.pop();
+         operandStack.push(operand2 - operand1);
+         accumulator=operand2 - operand1;
      }
  }
 
  // Méthode pour effectuer une opération de multiplication
  public void multiply() {
      if (!operandStack.isEmpty()) {
-         double operand = operandStack.pop();
-         accumulator *= operand;
+    	 double operand1 = operandStack.pop();
+         double operand2 = operandStack.pop();
+         operandStack.push(operand1 * operand2);
+         accumulator=operand1 * operand2;
      }
  }
 
  // Méthode pour effectuer une opération de division
  public void divide() {
      if (!operandStack.isEmpty()) {
-         double operand = operandStack.pop();
-         if (operand != 0) {
-             accumulator /= operand;
+    	 double operand1 = operandStack.pop();
+         double operand2 = operandStack.pop();
+         if (operand1 != 0) {
+        	 operandStack.push(operand2 / operand1);
+        	 accumulator=operand2 / operand1;
          } else {
-             accumulator=0;
+        	 operandStack.push((double) 0);
+        	 accumulator=0.0;
          }
      }
  }
