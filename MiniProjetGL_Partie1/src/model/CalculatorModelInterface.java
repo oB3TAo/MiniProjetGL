@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Stack;
+
 public interface CalculatorModelInterface {
 
 	// Méthode pour effectuer une opération de soustraction
