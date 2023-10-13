@@ -37,6 +37,12 @@ public class CalculatorMain {
 
         System.out.println("Pile d'opérandes après vidage : " + calculator.getOperandStack());
         System.out.println("Accumulateur après vidage : " + calculator.getAccumulator());
+        
+        //swap
+        calculator.push(7.0); calculator.push(3.0); calculator.push(2.0);
+        System.out.println("Pile d'opérandes avant swap : " + calculator.getOperandStack());
+        calculator.swap();
+        System.out.println("Pile d'opérandes après swap : " + calculator.getOperandStack());
     }
 }
 
