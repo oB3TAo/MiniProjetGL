@@ -4,7 +4,7 @@ package model;
 import java.util.Stack;
 
 //Modèle de la calculatrice
-public class CalculatorModel {
+public class CalculatorModel implements CalculatorModelInterface{
  private double accumulator; // L'accumulateur
  private Stack<Double> operandStack; // La pile d'opérandes
 
