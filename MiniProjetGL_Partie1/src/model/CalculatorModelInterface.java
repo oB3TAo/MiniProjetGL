@@ -1,4 +1,4 @@
-package TP;
+package model;
 
 public interface CalculatorModelInterface {
 

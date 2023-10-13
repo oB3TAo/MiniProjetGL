@@ -1,5 +1,5 @@
 //Clément GABON et Loïc Lainé
-package TP;
+package model;
 
 import java.util.Stack;
 

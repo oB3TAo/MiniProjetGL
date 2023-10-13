@@ -1,5 +1,5 @@
 //Clément GABON et Loïc Lainé TP de Génie logiciel
-package TP;
+package model;
 
 public class CalculatorMain {
     public static void main(String[] args) {
