@@ -17,9 +17,12 @@ public class CalculatorModel implements CalculatorModelInterface {
 	public void add() {
 		if (!operandStack.isEmpty()) {
 			double operand1 = operandStack.pop();
-			double operand2 = operandStack.pop();
-			operandStack.push(operand1 + operand2);
-			accumulator = operand1 + operand2;
+			if (!operandStack.isEmpty()) {
+				double operand2 = operandStack.pop();
+				operandStack.push(operand1 + operand2);
+				accumulator = operand1 + operand2;
+			}
+			else { operandStack.push(operand1); }
 		}
 	}
 
@@ -47,6 +50,7 @@ public class CalculatorModel implements CalculatorModelInterface {
 	public void divide() {
 		if (!operandStack.isEmpty()) {
 			double operand1 = operandStack.pop();
+			
 			double operand2 = operandStack.pop();
 			if (operand1 != 0) {
 				operandStack.push(operand2 / operand1);
