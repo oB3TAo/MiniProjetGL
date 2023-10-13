@@ -72,8 +72,8 @@ public class CalculatorModel implements CalculatorModelInterface {
 	}
 	
 	public void swap() {
-		top = operandStack.pop();
-		new_top = operandStack.pop();
+		double top = operandStack.pop();
+		double new_top = operandStack.pop();
 		operandStack.push(top);
 		operandStack.push(new_top);
 	}
