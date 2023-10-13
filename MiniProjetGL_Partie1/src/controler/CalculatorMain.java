@@ -1,6 +1,8 @@
 //Clément GABON et Loïc Lainé TP de Génie logiciel
 package controler;
 
+import model.CalculatorModel;
+
 public class CalculatorMain {
     public static void main(String[] args) {
         CalculatorModel calculator = new CalculatorModel();
