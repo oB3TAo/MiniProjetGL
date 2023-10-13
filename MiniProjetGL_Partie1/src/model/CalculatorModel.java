@@ -30,9 +30,11 @@ public class CalculatorModel implements CalculatorModelInterface {
 	public void subtract() {
 		if (!operandStack.isEmpty()) {
 			double operand1 = operandStack.pop();
-			double operand2 = operandStack.pop();
-			operandStack.push(operand2 - operand1);
-			accumulator = operand2 - operand1;
+			if (!operandStack.isEmpty()) {
+				double operand2 = operandStack.pop();
+				operandStack.push(operand2 - operand1);
+				accumulator = operand2 - operand1;
+			} else { operandStack.push(operand1); }
 		}
 	}
 
@@ -40,9 +42,11 @@ public class CalculatorModel implements CalculatorModelInterface {
 	public void multiply() {
 		if (!operandStack.isEmpty()) {
 			double operand1 = operandStack.pop();
-			double operand2 = operandStack.pop();
-			operandStack.push(operand1 * operand2);
-			accumulator = operand1 * operand2;
+			if (!operandStack.isEmpty()) {
+				double operand2 = operandStack.pop();
+				operandStack.push(operand1 * operand2);
+				accumulator = operand1 * operand2;
+			} else { operandStack.push(operand1); }	
 		}
 	}
 
@@ -50,15 +54,16 @@ public class CalculatorModel implements CalculatorModelInterface {
 	public void divide() {
 		if (!operandStack.isEmpty()) {
 			double operand1 = operandStack.pop();
-			
-			double operand2 = operandStack.pop();
-			if (operand1 != 0) {
-				operandStack.push(operand2 / operand1);
-				accumulator = operand2 / operand1;
-			} else {
-				operandStack.push((double) 0);
-				accumulator = 0.0;
-			}
+			if (!operandStack.isEmpty()) {
+				double operand2 = operandStack.pop();
+				if (operand1 != 0) {
+					operandStack.push(operand2 / operand1);
+					accumulator = operand2 / operand1;
+				} else {
+					operandStack.push((double) 0);
+					accumulator = 0.0;
+				}
+			} else { operandStack.push(operand1); }
 		}
 	}
 

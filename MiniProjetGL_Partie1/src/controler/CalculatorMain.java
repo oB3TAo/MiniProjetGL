@@ -9,7 +9,7 @@ public class CalculatorMain {
 
         // Addition
         calculator.push(5.0);
-        calculator.push(3.0);
+        
         System.out.println("Pile d'opérandes avant addition : " + calculator.getOperandStack());
         System.out.println("Accumulateur avant addition : " + calculator.getAccumulator());
         calculator.add();

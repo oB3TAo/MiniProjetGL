@@ -19,10 +19,10 @@ public interface CalculatorModelInterface {
 	// Méthode pour empiler un nombre sur la pile
 	public void push(double value);
 
-	// Méthode pour prendre le premier élémenet de la pile
+	// Méthode pour prendre le premier élément de la pile et le return
 	public void pop();
 
-	// Méthode drop
+	// Méthode pour prendre le premier élément de la pile
 	public void drop();
 
 	// Méthode swap
