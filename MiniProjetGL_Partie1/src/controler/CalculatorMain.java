@@ -1,12 +1,31 @@
 //Clément GABON et Loïc Lainé TP de Génie logiciel
 package controler;
 
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import model.CalculatorModel;
+import model.CalculatorModelInterface;
+import javafx.application.Application;
 
-public class CalculatorMain {
+public class CalculatorMain extends Application{
+    public void start(Stage primaryStage) throws Exception {
+			try {
+				BorderPane root = new BorderPane();
+				Scene scene = new Scene(root,400,400);
+				
+				primaryStage.setScene(scene);
+				primaryStage.show();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		
+	}
+    
     public static void main(String[] args) {
-        CalculatorModel calculator = new CalculatorModel();
-
+      	
+    	CalculatorModelInterface calculator = new CalculatorModel();
+        launch(args);
         // Addition
         calculator.push(5.0);
         
@@ -44,5 +63,7 @@ public class CalculatorMain {
         calculator.swap();
         System.out.println("Pile d'opérandes après swap : " + calculator.getOperandStack());
     }
+
+		
 }
 
