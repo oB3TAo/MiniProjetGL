@@ -1,11 +1,11 @@
 //Clément GABON et Loïc Lainé TP de Génie logiciel
 package controler;
 
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+
 import javafx.stage.Stage;
-import model.CalculatorModel;
-import model.CalculatorModelInterface;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
 import view.CalculatorGUIInterface;
 import view.CalculatorGUI;
@@ -15,6 +15,13 @@ public class CalculatorMain extends Application{
 			try {
 				CalculatorGUIInterface gui = new CalculatorGUI(primaryStage);
 				gui.affiche();
+				gui.change("accu");
+				List<Double> liste = new ArrayList<Double>();
+				liste.add(1.0);
+				liste.add(2.0);
+				liste.add(3.0);
+				gui.change(liste);
+				
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -22,9 +29,9 @@ public class CalculatorMain extends Application{
 	}
     
     public static void main(String[] args) {
-      	
-    	CalculatorModelInterface calculator = new CalculatorModel();
-        launch(args);
+      	launch(args);
+    	/*CalculatorModelInterface calculator = new CalculatorModel();
+        
         // Addition
         calculator.push(5.0);
         
@@ -60,7 +67,7 @@ public class CalculatorMain extends Application{
         calculator.push(7.0); calculator.push(3.0); calculator.push(2.0);
         System.out.println("Pile d'opérandes avant swap : " + calculator.getOperandStack());
         calculator.swap();
-        System.out.println("Pile d'opérandes après swap : " + calculator.getOperandStack());
+        System.out.println("Pile d'opérandes après swap : " + calculator.getOperandStack());*/
     }
 
 		
