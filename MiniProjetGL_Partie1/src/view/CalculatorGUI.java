@@ -100,12 +100,17 @@ public class CalculatorGUI implements CalculatorGUIInterface{
         
 	}
 	
+	// permet de gérer les actions(Button) dans le Controler
 	public Button getButton(int i) {
 		if (i < 10) {
 			return numberButtons[i];
-		} else if (i==10) {
+		} 
+		// si on rentre 10 on retourne le boutton plus
+		else if (i==10) {
 			return addButton;
-		} else if (i==11) {
+		} 
+		// si on rentre 11 on retourne le bouton moins 
+		else if (i==11) {
 			return subButton;
 		} else if (i==12) {
 			return mulButton;
