@@ -7,15 +7,14 @@ import javafx.stage.Stage;
 import model.CalculatorModel;
 import model.CalculatorModelInterface;
 import javafx.application.Application;
+import view.CalculatorGUIInterface;
+import view.CalculatorGUI;
 
 public class CalculatorMain extends Application{
     public void start(Stage primaryStage) throws Exception {
 			try {
-				BorderPane root = new BorderPane();
-				Scene scene = new Scene(root,400,400);
-				
-				primaryStage.setScene(scene);
-				primaryStage.show();
+				CalculatorGUIInterface gui = new CalculatorGUI(primaryStage);
+				gui.affiche();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}

@@ -15,13 +15,16 @@ public class CalculatorModel implements CalculatorModelInterface {
 
 	// Méthode pour effectuer une opération d'addition
 	public void add() {
+		// Si la pile n'est pas vide, on peut prendre le premier élément
 		if (!operandStack.isEmpty()) {
 			double operand1 = operandStack.pop();
+			// Si la pile n'est toujours pas vide, on prend le nouveau premier élément
 			if (!operandStack.isEmpty()) {
 				double operand2 = operandStack.pop();
 				operandStack.push(operand1 + operand2);
 				accumulator = operand1 + operand2;
 			}
+			// Si elle est vide, on remet le premier élément retiré dans la pile
 			else { operandStack.push(operand1); }
 		}
 	}
@@ -72,19 +75,24 @@ public class CalculatorModel implements CalculatorModelInterface {
 		operandStack.push(value);
 	}
 	
+	// Méthode pour enlever et retourner le dernier opérande de la pile
 	public void pop() {
 		operandStack.pop();
 	}
 	
+	// Méthode pour éliminé le dernier opérande de la liste
 	public void drop() {
 		operandStack.pop();
 	}
 	
+	// Méthode pour échanger les 2 derniers opérandes de la pile, il faut s'assurer d'avoir au moins 2 opérandes dans la pile
 	public void swap() {
-		double top = operandStack.pop();
-		double new_top = operandStack.pop();
-		operandStack.push(top);
-		operandStack.push(new_top);
+		if (operandStack.size() >= 2) {
+			double top = operandStack.pop();
+			double new_top = operandStack.pop();
+			operandStack.push(top);
+			operandStack.push(new_top);
+		}
 	}
 
 	// Méthode pour vider la pile
