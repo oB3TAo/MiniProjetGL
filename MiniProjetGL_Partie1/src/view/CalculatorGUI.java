@@ -104,10 +104,10 @@ public class CalculatorGUI implements CalculatorGUIInterface{
 	public void change(List<Double> stackData) {
 		
 		//le deuxième élément de la liste apparait dans une boite de texte
-		
+		displayField1.clear();
         displayField1.setText(Double.toString(stackData.get(1)));
         //le premier élément de la liste apparait dans une boite de texte
-        
+        displayField2.clear();
         displayField2.setText(Double.toString(stackData.get(0)));
 	}
 	

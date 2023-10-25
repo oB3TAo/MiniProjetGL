@@ -14,6 +14,7 @@ public class CalculatorMain extends Application{
     public void start(Stage primaryStage) throws Exception {
 			try {
 				CalculatorControlerInterface control = new CalculatorControler(primaryStage);
+				
 				//control.run();
 				//control.change("accu");
 				//control.change(new ArrayList<Double>());
