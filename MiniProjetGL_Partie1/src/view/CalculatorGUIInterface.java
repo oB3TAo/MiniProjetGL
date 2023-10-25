@@ -2,15 +2,16 @@ package view;
 
 import java.util.List;
 
-public interface CalculatorGUIInterface {
+import javafx.scene.control.Button;
 
-	public default void affiche() {
-	     
-	     }
-	public default void change(String accu) {
-	     
-    }
-	public default void change(List<Double> stackData) {
-	     
-    }
-	 }	
+
+
+
+
+public interface CalculatorGUIInterface{
+	
+	public void affiche();
+	public void change(String accu) ;
+	public void change(List<Double> stackData) ;
+	public Button getButton(int i);
+}	

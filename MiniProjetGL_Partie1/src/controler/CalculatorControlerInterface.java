@@ -4,10 +4,7 @@ import java.util.List;
 
 public interface CalculatorControlerInterface {
 	
-	public default void change(String accu) {
-	     
-    }
-	public default void change(List<Double> stackData) {
-	     
-    }
+	public void change(String accu) ;
+	public void change(List<Double> stackData);
+	
 }
