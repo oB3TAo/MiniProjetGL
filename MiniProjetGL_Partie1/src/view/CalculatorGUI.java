@@ -129,6 +129,8 @@ public class CalculatorGUI implements CalculatorGUIInterface{
 			return divButton;
 		} else if (i==14) {
 			return swapButton;
+		} else if (i == 15){
+			return delButton;
 		} else {
 			return delButton;
 		}
