@@ -76,8 +76,8 @@ public class CalculatorModel implements CalculatorModelInterface {
 	}
 	
 	// Méthode pour enlever et retourner le dernier opérande de la pile
-	public void pop() {
-		operandStack.pop();
+	public Double pop() {
+		return operandStack.pop();
 	}
 	
 	// Méthode pour éliminé le dernier opérande de la liste

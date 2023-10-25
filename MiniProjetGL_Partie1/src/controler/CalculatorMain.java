@@ -13,14 +13,19 @@ import view.CalculatorGUI;
 public class CalculatorMain extends Application{
     public void start(Stage primaryStage) throws Exception {
 			try {
-				CalculatorGUIInterface gui = new CalculatorGUI(primaryStage);
+				CalculatorControlerInterface control = new CalculatorControler(primaryStage);
+				//control.run();
+				//control.change("accu");
+				//control.change(new ArrayList<Double>());
+				
+				/*CalculatorGUIInterface gui = new CalculatorGUI(primaryStage);
 				gui.affiche();
 				gui.change("accu");
 				List<Double> liste = new ArrayList<Double>();
 				liste.add(1.0);
 				liste.add(2.0);
 				liste.add(3.0);
-				gui.change(liste);
+				gui.change(liste);*/
 				
 			} catch(Exception e) {
 				e.printStackTrace();

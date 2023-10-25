@@ -20,7 +20,7 @@ public interface CalculatorModelInterface {
 	public void push(double value);
 
 	// Méthode pour prendre le premier élément de la pile et le return
-	public void pop();
+	public Double pop();
 
 	// Méthode pour prendre le premier élément de la pile
 	public void drop();
