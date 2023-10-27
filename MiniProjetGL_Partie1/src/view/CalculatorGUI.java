@@ -86,14 +86,17 @@ public class CalculatorGUI implements CalculatorGUIInterface{
         
         displayField1 = new TextField();
         displayField1.setEditable(false);
+        displayField1.setPromptText("Avant dernier opérande");
         grid.add(displayField1, 0,0, 4, 1);
         
         displayField2 = new TextField();
         displayField2.setEditable(false);
+        displayField2.setPromptText("Dernier opérande");
         grid.add(displayField2, 0, 1, 4, 1);
         
         displayField3 = new TextField();
         displayField3.setEditable(false);
+        displayField3.setPromptText("Accumulateur");
         grid.add(displayField3, 0, 2, 4, 1);
 	}
 	
