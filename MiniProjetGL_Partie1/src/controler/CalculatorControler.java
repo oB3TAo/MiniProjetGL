@@ -1,8 +1,8 @@
 package controler;
 
-import java.util.ArrayList;
-import java.util.List;
 
+
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -13,17 +13,10 @@ public class CalculatorControler implements CalculatorControlerInterface {
 	
 	private CalculatorModelInterface model;
 	private CalculatorGUIInterface view;
-	private List <Double> stackData;
-	private String accumulateur;
 	
 	public CalculatorControler(CalculatorModelInterface model,CalculatorGUIInterface view) {
-		// à passer dans le modele
-		accumulateur = "";
-		stackData = new ArrayList<Double>();
-		
 		this.view = view;
 		this.model = model;
-		
 	}
 	
 	
@@ -31,8 +24,6 @@ public class CalculatorControler implements CalculatorControlerInterface {
 	
 	public void run() {
 		view.affiche();
-		view.change(accumulateur);
-		view.change(stackData);
 		for (int i = 0; i < 20; i++) {
 			view.getButton(i).setOnAction(new ButtonHandler());
 		}
@@ -55,6 +46,7 @@ public class CalculatorControler implements CalculatorControlerInterface {
 		public void handle(ActionEvent event) {
 			Button source = (Button) event.getSource();
 			String buttonText = source.getText();
+			String accumulateur = view.getAccumulateur();
 			
 			switch(buttonText) {
 		    case "1":
@@ -71,10 +63,13 @@ public class CalculatorControler implements CalculatorControlerInterface {
 		        change(buttonText);
 		        break;
 		        
-		    case "<-":
-		        Double accu = Double.parseDouble(view.getAccu());
-		        model.push(accu);
-		        change(model.getOperandStack());
+		    case "push":
+		    	
+		    	if (!accumulateur.isEmpty()) {
+		        	model.push(Double.parseDouble(accumulateur));
+		        	view.clearAccumulateur();
+		        	change(model.getOperandStack());
+		        }
 		        break;
 		        
 		    case "+":
@@ -102,7 +97,7 @@ public class CalculatorControler implements CalculatorControlerInterface {
 		        change(model.getOperandStack());
 		        break;
 		        
-		    case "del":
+		    case "drop":
 		        if (!model.getOperandStack().isEmpty()) {
 		            model.drop();
 		            change(model.getOperandStack());
@@ -114,7 +109,14 @@ public class CalculatorControler implements CalculatorControlerInterface {
 		            model.clearStack();
 		            change(model.getOperandStack());
 		        }
-		        break;       
+		        break; 
+		    
+		    case "<-":
+		    	if (!accumulateur.isEmpty()) {
+		        	String newAccumulateur = accumulateur.substring(0, accumulateur.length()-1);
+		        	view.clearAccumulateur();
+		        	change(newAccumulateur);
+		        }
 			}
 		}
 	}

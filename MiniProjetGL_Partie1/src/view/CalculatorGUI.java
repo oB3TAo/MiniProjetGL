@@ -23,10 +23,11 @@ public class CalculatorGUI implements CalculatorGUIInterface{
 	private Button mulButton;
 	private Button divButton;
 	private Button swapButton;
-	private Button delButton;
+	private Button dropButton;
 	private Button enterButton;
 	private Button dotButton;
 	private Button clearButton;
+	private Button delButton;
 	
 	private TextField displayField3;
 	private TextField displayField2;
@@ -67,11 +68,11 @@ public class CalculatorGUI implements CalculatorGUIInterface{
         mulButton = new Button("*"); mulButton.setPrefSize(35, 35);
         divButton = new Button("/"); divButton.setPrefSize(35, 35);
         swapButton = new Button("<>"); swapButton.setPrefSize(35, 35);
-        delButton = new Button("del"); delButton.setPrefSize(35, 35); 
-        enterButton = new Button("<-"); enterButton.setPrefSize(35, 35);
+        dropButton = new Button("drop"); dropButton.setPrefSize(35, 35); dropButton.setStyle("-fx-font-size:10;");
+        enterButton = new Button("push"); enterButton.setPrefSize(35, 35); enterButton.setStyle("-fx-font-size:10;");
         dotButton = new Button("."); dotButton.setPrefSize(35,35);
         clearButton = new Button("C"); clearButton.setPrefSize(35,35);
-        
+        delButton = new Button("<-"); delButton.setPrefSize(35,35);
         
         grid.add(addButton, 3, 3);
         grid.add(subButton, 3, 4);
@@ -79,9 +80,10 @@ public class CalculatorGUI implements CalculatorGUIInterface{
         grid.add(divButton, 3, 6);
         grid.add(dotButton, 0, 6);
         grid.add(enterButton, 2, 6);
-        grid.add(delButton, 0, 7);
+        grid.add(dropButton, 0, 7);
         grid.add(swapButton, 1, 7);
         grid.add(clearButton, 2, 7);
+        grid.add(delButton, 3, 7);
         
         
         displayField1 = new TextField();
@@ -115,11 +117,12 @@ public class CalculatorGUI implements CalculatorGUIInterface{
         displayField3.appendText(accu);
 	}
 	
-	public String getAccu() {
-		String accu = displayField3.getText();
+	public String getAccumulateur() {
+		return displayField3.getText();
+	}
+	
+	public void clearAccumulateur() {
 		displayField3.clear();
-		return accu;
-		
 	}
 	
 	// boites de texte pour afficher les derniers éléments du operandStack (sous forme de liste)
@@ -161,13 +164,15 @@ public class CalculatorGUI implements CalculatorGUIInterface{
 		} else if (i==14) {
 			return swapButton;
 		} else if (i == 15){
-			return delButton;
+			return dropButton;
 		} else if (i == 16){
 			return enterButton;
 		} else if (i == 17){
 			return dotButton;
-		} else {
+		} else if (i == 18){
 			return clearButton;
+		} else {
+			return delButton;
 		}
 	}
 	

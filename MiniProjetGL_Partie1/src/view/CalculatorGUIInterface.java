@@ -14,5 +14,6 @@ public interface CalculatorGUIInterface{
 	public void change(String accu) ;
 	public void change(List<Double> stackData) ;
 	public Button getButton(int i);
-	public String getAccu();
+	public String getAccumulateur();
+	public void clearAccumulateur();
 }	
