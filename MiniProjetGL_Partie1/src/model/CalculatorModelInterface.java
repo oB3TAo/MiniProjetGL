@@ -31,12 +31,6 @@ public interface CalculatorModelInterface {
 	// Méthode pour vider la pile
 	public void clearStack();
 
-	// Méthode pour vider l'accumulateur
-	public void clearAccumulator();
-
-	// Méthode pour obtenir la valeur actuelle de l'accumulateur
-	public double getAccumulator();
-
 	// Méthode pour obtenir la pile d'opérandes (pour des besoins de débogage, par
 	// exemple)
 	public Stack<Double> getOperandStack();

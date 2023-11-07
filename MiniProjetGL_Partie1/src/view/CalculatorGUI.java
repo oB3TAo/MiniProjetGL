@@ -24,6 +24,10 @@ public class CalculatorGUI implements CalculatorGUIInterface{
 	private Button divButton;
 	private Button swapButton;
 	private Button delButton;
+	private Button enterButton;
+	private Button dotButton;
+	private Button clearButton;
+	
 	private TextField displayField3;
 	private TextField displayField2;
 	private TextField displayField1;
@@ -64,24 +68,35 @@ public class CalculatorGUI implements CalculatorGUIInterface{
         divButton = new Button("/"); divButton.setPrefSize(35, 35);
         swapButton = new Button("<>"); swapButton.setPrefSize(35, 35);
         delButton = new Button("del"); delButton.setPrefSize(35, 35); 
+        enterButton = new Button("<-"); enterButton.setPrefSize(35, 35);
+        dotButton = new Button("."); dotButton.setPrefSize(35,35);
+        clearButton = new Button("C"); clearButton.setPrefSize(35,35);
+        
         
         grid.add(addButton, 3, 3);
         grid.add(subButton, 3, 4);
         grid.add(mulButton, 3, 5);
         grid.add(divButton, 3, 6);
-        grid.add(swapButton, 0, 6);
-        grid.add(delButton, 2, 6);
+        grid.add(dotButton, 0, 6);
+        grid.add(enterButton, 2, 6);
+        grid.add(delButton, 0, 7);
+        grid.add(swapButton, 1, 7);
+        grid.add(clearButton, 2, 7);
+        
         
         displayField1 = new TextField();
         displayField1.setEditable(false);
+        displayField1.setPromptText("Avant dernier opérande");
         grid.add(displayField1, 0,0, 4, 1);
         
         displayField2 = new TextField();
         displayField2.setEditable(false);
+        displayField2.setPromptText("Dernier opérande");
         grid.add(displayField2, 0, 1, 4, 1);
         
         displayField3 = new TextField();
         displayField3.setEditable(false);
+        displayField3.setPromptText("Accumulateur");
         grid.add(displayField3, 0, 2, 4, 1);
 	}
 	
@@ -89,7 +104,7 @@ public class CalculatorGUI implements CalculatorGUIInterface{
 	public void affiche() {
 		
 		stage.setTitle("Calculator");       
-		Scene scene = new Scene(grid, 300, 400);
+		Scene scene = new Scene(grid, 300, 500);
 		stage.setScene(scene);		
 		stage.show();
 		
@@ -97,22 +112,38 @@ public class CalculatorGUI implements CalculatorGUIInterface{
 	
 	//boite de texte pour l'accumulateur
 	public void change(String accu) { 
-        displayField3.setText(accu);
+        displayField3.appendText(accu);
+	}
+	
+	public String getAccu() {
+		String accu = displayField3.getText();
+		displayField3.clear();
+		return accu;
+		
 	}
 	
 	// boites de texte pour afficher les derniers éléments du operandStack (sous forme de liste)
 	public void change(List<Double> stackData) {
-		
-		//le deuxième élément de la liste apparait dans une boite de texte
-		displayField1.clear();
-        displayField1.setText(Double.toString(stackData.get(1)));
-        //le premier élément de la liste apparait dans une boite de texte
-        displayField2.clear();
-        displayField2.setText(Double.toString(stackData.get(0)));
+		if (stackData.size() == 0) {
+			displayField1.clear();
+			displayField2.clear();
+		} else if (stackData.size() == 1) {
+			displayField1.clear();
+			displayField2.clear();
+			displayField2.setText(Double.toString(stackData.get(0)));
+		} else {
+			//le deuxième élément de la liste apparait dans une boite de texte
+			displayField1.clear();
+			displayField1.setText(Double.toString(stackData.get(stackData.size()-2)));
+			//le premier élément de la liste apparait dans une boite de texte
+			displayField2.clear();
+			displayField2.setText(Double.toString(stackData.get(stackData.size()-1)));
+		}
 	}
 	
 	// permet de gérer les actions(Button) dans le Controler
 	public Button getButton(int i) {
+		
 		if (i < 10) {
 			return numberButtons[i];
 		} 
@@ -131,8 +162,12 @@ public class CalculatorGUI implements CalculatorGUIInterface{
 			return swapButton;
 		} else if (i == 15){
 			return delButton;
+		} else if (i == 16){
+			return enterButton;
+		} else if (i == 17){
+			return dotButton;
 		} else {
-			return delButton;
+			return clearButton;
 		}
 	}
 	

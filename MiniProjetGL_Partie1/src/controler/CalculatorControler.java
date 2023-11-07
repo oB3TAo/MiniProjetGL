@@ -6,171 +6,141 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
-import model.CalculatorModel;
 import model.CalculatorModelInterface;
-import view.CalculatorGUI;
 import view.CalculatorGUIInterface;
 
 public class CalculatorControler implements CalculatorControlerInterface {
-	
-	private CalculatorModelInterface calc;
-	private CalculatorGUIInterface gui;
-	private Stage stage;
-	private List <Double> stackData;
-	private String accu;
-	
-	public CalculatorControler(Stage primaryStage) {
-		
-		accu = "";
+
+	private CalculatorModelInterface model;
+	private CalculatorGUIInterface view;
+	private List<Double> stackData;
+	private String accumulateur;
+
+	public CalculatorControler(CalculatorModelInterface model, CalculatorGUIInterface view) {
+		// à passer dans le modele ???
+		accumulateur = "";
 		stackData = new ArrayList<Double>();
-		stackData.add(0.0);
-		stackData.add(0.0);
-		stage = primaryStage;
-		gui = new CalculatorGUI(stage);
-		calc = new CalculatorModel();
-		gui.affiche();
-		gui.change(accu);
-		gui.change(stackData);
-		for (int i = 0; i < 16; i++) {
-			gui.getButton(i).setOnAction(new ButtonHandler());
-		}
-		
-	}
-	
-	
-	
-	
-	
-	
-	public void change(String accu) {
-		gui.change(accu);
+
+		this.view = view;
+		this.model = model;
+
 	}
 
-	
-	public void change(List<Double> stackData) {		
-		gui.change(stackData);			
+	/**
+	 * méthode permettant de lancer les différentes méthodes gérant les actions et
+	 * l'affichage de la calculatrice
+	 */
+	public void run() {
+		view.affiche();
+		view.change(accumulateur);
+		view.change(stackData);
+		for (int i = 0; i < 20; i++) {
+			view.getButton(i).setOnAction(new ButtonHandler());
+		}
 	}
-	
-	
+
+	// méthode permettant de changer la valeur de l'accumulateur
+	public void change(String accumulateur) {
+		view.change(accumulateur);
+	}
+
+	// méthode permettant de changer la valeur de l'accumulateur
+	public void change(List<Double> stackData) {
+		view.change(stackData);
+	}
+
 	private class ButtonHandler implements EventHandler<ActionEvent> {
-		
-		
+
 		@Override
+		/**
+		 * La méthode handle permet de gérer les interactions sur chaque boutons, pour
+		 * effectuer les bonnes actions
+		 */
 		public void handle(ActionEvent event) {
 			Button source = (Button) event.getSource();
 			String buttonText = source.getText();
-			
-			if (buttonText.equals("1")) {
-				stackData.add(0,1.0);
-				change(stackData);
-				calc.push(1.0);
-				System.out.println(calc.getOperandStack());
-			} else if (buttonText.equals("2")){
-				stackData.add(0,2.0);
-				change(stackData);
-				calc.push(2.0);
-				System.out.println(calc.getOperandStack());
-			} else if (buttonText.equals("3")){
-				stackData.add(0,3.0);
-				change(stackData);
-				calc.push(3.0);
-				System.out.println(calc.getOperandStack());
-			} else if (buttonText.equals("4")){
-				stackData.add(0,4.0);
-				change(stackData);
-				calc.push(4.0);
-				System.out.println(calc.getOperandStack());
-			} else if (buttonText.equals("5")){
-				stackData.add(0,5.0);
-				change(stackData);
-				calc.push(5.0);
-				System.out.println(calc.getOperandStack());
-			} else if (buttonText.equals("6")){
-				stackData.add(0,6.0);
-				change(stackData);
-				calc.push(6.0);
-				System.out.println(calc.getOperandStack());
-			} else if (buttonText.equals("7")){
-				stackData.add(0,7.0);
-				change(stackData);
-				calc.push(7.0);
-				System.out.println(calc.getOperandStack());
-				
-			} else if (buttonText.equals("8")){
-				stackData.add(0,8.0);
-				change(stackData);
-				calc.push(8.0);
-				System.out.println(calc.getOperandStack());
-			} else if (buttonText.equals("9")){
-				stackData.add(0,9.0);
-				change(stackData);
-				calc.push(9.0);
-				System.out.println(calc.getOperandStack());
-			} else if (buttonText.equals("+")) {
-				calc.add();
-				Double somme = calc.pop();
-				stackData.remove(0);
-				stackData.remove(0);
-				stackData.add(0,somme);
-				calc.push(somme);
-				change(stackData);
-				change(Double.toString(calc.getAccumulator()));
-				
-			} else if (buttonText.equals("-")) {
-				calc.subtract();
-				Double diff = calc.pop();
-				stackData.remove(0);
-				stackData.remove(0);
-				stackData.add(0,diff);
-				calc.push(diff);
-				change(stackData);
-				change(Double.toString(calc.getAccumulator()));
-				
-			} else if (buttonText.equals("*")) {
-				calc.multiply();
-				Double produit = calc.pop();
-				stackData.remove(0);
-				stackData.remove(0);
-				stackData.add(0,produit);
-				calc.push(produit);
-				change(stackData);
-				change(Double.toString(calc.getAccumulator()));
-				
-			} else if (buttonText.equals("/")) {
-				calc.divide();
-				Double quotient = calc.pop();
-				stackData.remove(0);
-				stackData.remove(0);
-				stackData.add(0,quotient);
-				calc.push(quotient);
-				change(stackData);
-				change(Double.toString(calc.getAccumulator()));
-				
-			} else if (buttonText.equals("<>")) {
-				calc.swap();
-				stackData.remove(0);
-				stackData.remove(0);
-				Double one = calc.pop();
-				Double two = calc.pop();
-				stackData.add(0,two);
-				stackData.add(0,one);
-				calc.push(two);
-				calc.push(one);
-				change(stackData);
-				System.out.println(calc.getOperandStack());
-			} else if (buttonText.equals("del")){
-				if (!calc.getOperandStack().isEmpty()) {
-					calc.drop();
-					stackData.remove(0);
-					change(stackData);
-					System.out.println(calc.getOperandStack());
-				} else {
-					change("error");
+
+			// Le switch permet de différencier les actions de chaque boutons
+			switch (buttonText) {
+
+			/**
+			 * pour les boutons des numéros de 0 à 9 et du point symbolisant la virgule,
+			 * réalise la même action. Qui va transformer la valeur du bouton en texte et
+			 * rajouter à la suite chaque valeur
+			 */
+			case "1":
+			case "2":
+			case "3":
+			case "4":
+			case "5":
+			case "6":
+			case "7":
+			case "8":
+			case "9":
+			case "0":
+			case ".":
+				change(buttonText);
+				break;
+
+			/**
+			 * L'action réaliser est de push dans l'accumulateur les valeurs rentrer avec
+			 * les boutons précédent
+			 */
+			case "<-":
+				Double accu = Double.parseDouble(view.getAccu());
+				model.push(accu);
+				change(model.getOperandStack());
+				break;
+
+			// L'action réaliser est l'addition
+			case "+":
+				model.add();
+				change(model.getOperandStack());
+				break;
+
+			// L'action réaliser est la soustraction
+			case "-":
+				model.subtract();
+				change(model.getOperandStack());
+				break;
+
+			// L'action réaliser est la multiplication
+			case "*":
+				model.multiply();
+				change(model.getOperandStack());
+				break;
+
+			// L'action réaliser est la division
+			case "/":
+				model.divide();
+				change(model.getOperandStack());
+				break;
+
+			/**
+			 * L'action réaliser est d'échanger la derniere valeur ajouter dans la pile avec
+			 * l'avant derniere
+			 */
+			case "<>":
+				model.swap();
+				change(model.getOperandStack());
+				break;
+
+			// L'action réaliser est de supprimer la derniere valeur ajouter dans la pile
+			case "del":
+				if (!model.getOperandStack().isEmpty()) {
+					model.drop();
+					change(model.getOperandStack());
 				}
+				break;
+
+			// L'action réaliser est de vider totalement la pile
+			case "C":
+				if (!model.getOperandStack().isEmpty()) {
+					model.clearStack();
+					change(model.getOperandStack());
+				}
+				break;
 			}
 		}
 	}
-		
-	
 }
