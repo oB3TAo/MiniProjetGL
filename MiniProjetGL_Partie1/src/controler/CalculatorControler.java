@@ -51,7 +51,6 @@ public class CalculatorControler implements CalculatorControlerInterface {
 
 	private class ButtonHandler implements EventHandler<ActionEvent> {
 
-		@Override
 		/**
 		 * La méthode handle permet de gérer les interactions sur chaque boutons, pour
 		 * effectuer les bonnes actions
@@ -94,10 +93,12 @@ public class CalculatorControler implements CalculatorControlerInterface {
 
 			// L'action réaliser est l'addition
 			case "+":
+				// Réalise l'addition
 				model.add();
+				// change la valeur dans l'accumulateur avec le résultat de l'addition
 				change(model.getOperandStack());
 				break;
-
+			// Les actions suivantes (-,*,/) sont similaires à celle de l'addition
 			// L'action réaliser est la soustraction
 			case "-":
 				model.subtract();
