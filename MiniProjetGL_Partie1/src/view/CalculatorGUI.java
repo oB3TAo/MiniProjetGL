@@ -102,7 +102,7 @@ public class CalculatorGUI implements CalculatorGUIInterface{
         grid.add(displayField3, 0, 2, 4, 1);
 	}
 	
-	//affichage du GUI
+	//affichage de la calculatrice 
 	public void affiche() {
 		
 		stage.setTitle("Calculator");       
@@ -117,10 +117,12 @@ public class CalculatorGUI implements CalculatorGUIInterface{
         displayField3.appendText(accu);
 	}
 	
+	//permet de récuperer l'accumulateur
 	public String getAccumulateur() {
 		return displayField3.getText();
 	}
 	
+	//permet d'effacer l'accumulateur
 	public void clearAccumulateur() {
 		displayField3.clear();
 	}

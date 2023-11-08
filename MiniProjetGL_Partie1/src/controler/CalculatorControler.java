@@ -1,3 +1,6 @@
+/**
+ * Partie controller du programme 
+ */
 package controler;
 
 
