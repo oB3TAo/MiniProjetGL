@@ -1,7 +1,6 @@
 //Clément GABON et Loïc Lainé TP de Génie logiciel
 package controler;
 
-
 import javafx.stage.Stage;
 import view.*;
 import model.*;
@@ -10,26 +9,24 @@ import model.*;
 
 import javafx.application.Application;
 
+public class CalculatorMain extends Application {
 
-public class CalculatorMain extends Application{
-	
-	//Méthode start et main permettant d'initiliaser et lancer la calculatrice
-	
-    public void start(Stage primaryStage) throws Exception {
-			try {
-				CalculatorGUIInterface view = new CalculatorGUI(primaryStage);	
-				CalculatorModelInterface model = new CalculatorModel();
-				CalculatorControlerInterface control = new CalculatorControler(model,view);
-				control.run();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-			
+	// Méthode start et main permettant d'initiliaser et lancer la calculatrice
+
+	public void start(Stage primaryStage) throws Exception {
+		
+		try {
+			CalculatorGUIInterface view = new CalculatorGUI(primaryStage);
+			CalculatorModelInterface model = new CalculatorModel();
+			CalculatorControlerInterface control = new CalculatorControler(model, view);
+			control.run();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
-    
-    public static void main(String[] args) {
-      	launch(args);
-    }		
-}
 
+	public static void main(String[] args) {
+		launch(args);
+	}
+}
