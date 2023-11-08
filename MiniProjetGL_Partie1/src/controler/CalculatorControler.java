@@ -98,6 +98,7 @@ public class CalculatorControler implements CalculatorControlerInterface {
 				// change la valeur dans l'accumulateur avec le résultat de l'addition
 				change(model.getOperandStack());
 				break;
+				
 			// Les actions suivantes (-,*,/,<>) sont similaires à celle de l'addition
 			// L'action réaliser est la soustraction
 			case "-":
