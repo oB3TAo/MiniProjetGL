@@ -15,6 +15,11 @@ public class CalculatorControler implements CalculatorControlerInterface {
 	private CalculatorModelInterface model;
 	private CalculatorGUIInterface view;
 
+	/**
+	 * 
+	 * @param model
+	 * @param view
+	 */
 	public CalculatorControler(CalculatorModelInterface model, CalculatorGUIInterface view) {
 
 		this.view = view;
@@ -38,7 +43,7 @@ public class CalculatorControler implements CalculatorControlerInterface {
 		view.change(accumulateur);
 	}
 
-	// méthode permettant de changer la valeur de l'accumulateur
+	// méthode permettant de changer la valeur de la pile
 	public void change(List<Double> stackData) {
 		view.change(stackData);
 	}
@@ -59,7 +64,7 @@ public class CalculatorControler implements CalculatorControlerInterface {
 			switch (buttonText) {
 
 			/**
-			 * pour les boutons des numéros de 0 à 9 et du point symbolisant la virgule,
+			 * Pour les boutons des numéros de 0 à 9 et du point symbolisant la virgule,
 			 * réalise la même action. Qui va transformer la valeur du bouton en texte et
 			 * rajouter à la suite chaque valeur
 			 */
@@ -92,13 +97,17 @@ public class CalculatorControler implements CalculatorControlerInterface {
 
 			// L'action réaliser est l'addition
 			case "+":
-				// Réalise l'addition
+				// Fait appel à la méthode add défini dans model
 				model.add();
 				// change la valeur dans l'accumulateur avec le résultat de l'addition
 				change(model.getOperandStack());
 				break;
 
-			// Les actions suivantes (-,*,/,<>) sont similaires à celle de l'addition
+			/**
+			 * Les actions suivantes sont similaires à celle de l'addition dans l'ensemble.
+			 * De la forme suivantes: Faire appel à une méthode dans model Change la valeur
+			 * dans l'accumulateur/pile (View)
+			 */
 
 			// L'action réaliser est la soustraction
 			case "-":
@@ -129,6 +138,7 @@ public class CalculatorControler implements CalculatorControlerInterface {
 
 			// L'action réaliser est de supprimer la derniere valeur ajouter dans la pile
 			case "drop":
+				// vérifie si la pile est vide ou non, pour évider les erreurs
 				if (!model.getOperandStack().isEmpty()) {
 					model.drop();
 					change(model.getOperandStack());
@@ -143,12 +153,18 @@ public class CalculatorControler implements CalculatorControlerInterface {
 				}
 				break;
 
-			// L'action réaliser est de supprimer la derniere valeur que vous avez rentrer
-			// avec les boutons de la calculette
+			/**
+			 * L'action réaliser est de supprimer la derniere valeur mise dans
+			 * l'accumulateur de la calculatrice
+			 */
 			case "<-":
+				// vérifie si l'accumulateur est vide ou non, pour évider les erreurs
 				if (!accumulateur.isEmpty()) {
+					// Créer une nouvelle valeur de l'accumulateuir en soustrayant le dernier caractère rajouté
 					String newAccumulateur = accumulateur.substring(0, accumulateur.length() - 1);
+					//Vide l'accumulateur en appelant la méthode dans view
 					view.clearAccumulateur();
+					//Change avec la nouvelle valeur 
 					change(newAccumulateur);
 				}
 			}
