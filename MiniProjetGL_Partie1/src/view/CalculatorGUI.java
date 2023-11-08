@@ -1,10 +1,10 @@
+/**
+ * Partie view du programme 
+ * par Clément Gabon & Loïc Lainé
+ */
+
 package view;
-
-
 import java.util.List;
-
-
-
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.geometry.Pos;
@@ -15,8 +15,11 @@ import javafx.stage.Stage;
 
 public class CalculatorGUI implements CalculatorGUIInterface{
 	
+	// javafx
 	private Stage stage;
+	//choix d'une GridPane étant donné de la géométrie d'une calculatrice
 	private GridPane grid;
+	//boutons
 	private Button[] numberButtons;
 	private Button addButton;
 	private Button subButton;
@@ -28,11 +31,12 @@ public class CalculatorGUI implements CalculatorGUIInterface{
 	private Button dotButton;
 	private Button clearButton;
 	private Button delButton;
-	
+	//boîtes de texte
 	private TextField displayField3;
 	private TextField displayField2;
 	private TextField displayField1;
 
+	//constructeur
 	public CalculatorGUI(Stage primaryStage) {
 		
 		stage = primaryStage;
@@ -47,19 +51,17 @@ public class CalculatorGUI implements CalculatorGUIInterface{
         
         //création des boutons de 0 à 9
         numberButtons = new Button[10];
-        
         numberButtons[0] = new Button("0");
         numberButtons[0].setPrefSize(35, 35);
         grid.add(numberButtons[0], 1, 6);
         
-        for (int i = 9; i > 0; i--) {
-        	
+        //ajout des boutons sur l'interface
+        for (int i = 9; i > 0; i--) {	
             numberButtons[i] = new Button(Integer.toString(i));
             numberButtons[i].setPrefSize(35, 35);
             int row = (i-1) / 3 + 3;
             int col = (i-1) % 3 ;
-            grid.add(numberButtons[i], col, row);
-            
+            grid.add(numberButtons[i], col, row);    
         }
         
         //création des boutons "opération"
@@ -74,6 +76,7 @@ public class CalculatorGUI implements CalculatorGUIInterface{
         clearButton = new Button("C"); clearButton.setPrefSize(35,35);
         delButton = new Button("<-"); delButton.setPrefSize(35,35);
         
+        //ajout des boutons sur l'interface
         grid.add(addButton, 3, 3);
         grid.add(subButton, 3, 4);
         grid.add(mulButton, 3, 5);
@@ -85,7 +88,7 @@ public class CalculatorGUI implements CalculatorGUIInterface{
         grid.add(clearButton, 2, 7);
         grid.add(delButton, 3, 7);
         
-        
+        //création et ajout de boîtes de texte sur l'interface
         displayField1 = new TextField();
         displayField1.setEditable(false);
         displayField1.setPromptText("Avant dernier opérande");
@@ -104,12 +107,10 @@ public class CalculatorGUI implements CalculatorGUIInterface{
 	
 	//affichage de la calculatrice 
 	public void affiche() {
-		
 		stage.setTitle("Calculator");       
 		Scene scene = new Scene(grid, 300, 500);
 		stage.setScene(scene);		
 		stage.show();
-		
 	}
 	
 	//boite de texte pour l'accumulateur
@@ -127,7 +128,7 @@ public class CalculatorGUI implements CalculatorGUIInterface{
 		displayField3.clear();
 	}
 	
-	// boites de texte pour afficher les derniers éléments du operandStack (sous forme de liste)
+	//boites de texte pour afficher les derniers éléments de la pile
 	public void change(List<Double> stackData) {
 		if (stackData.size() == 0) {
 			displayField1.clear();
@@ -146,7 +147,7 @@ public class CalculatorGUI implements CalculatorGUIInterface{
 		}
 	}
 	
-	// permet de gérer les actions(Button) dans le Controler
+	// permet de gérer les actions(Button) dans le Controller
 	public Button getButton(int i) {
 		
 		if (i < 10) {

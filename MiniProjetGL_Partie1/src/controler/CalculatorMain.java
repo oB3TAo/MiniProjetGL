@@ -11,7 +11,7 @@ import javafx.application.Application;
 
 public class CalculatorMain extends Application {
 
-	// Méthode start et main permettant d'initiliaser et lancer la calculatrice
+	// Initiliasation et lancement de la calculatrice
 
 	public void start(Stage primaryStage) throws Exception {
 		

@@ -1,8 +1,9 @@
 /**
  * Partie controller du programme 
+ * par Clément Gabon & Loïc Lainé
  */
-package controler;
 
+package controler;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,16 +22,12 @@ public class CalculatorControler implements CalculatorControlerInterface {
 	 * @param view
 	 */
 	public CalculatorControler(CalculatorModelInterface model, CalculatorGUIInterface view) {
-
 		this.view = view;
 		this.model = model;
-
 	}
 
-	/**
-	 * méthode permettant de lancer les différentes méthodes gérant les actions et
-	 * l'affichage de la calculatrice
-	 */
+	
+	// Méthode permettant de lancer l'affichage de la calculatrice
 	public void run() {
 		view.affiche();
 		for (int i = 0; i < 20; i++) {
@@ -38,16 +35,20 @@ public class CalculatorControler implements CalculatorControlerInterface {
 		}
 	}
 
-	// méthode permettant de changer la valeur de l'accumulateur
+	
+	// Méthode permettant de changer la valeur de l'accumulateur
 	public void change(String accumulateur) {
 		view.change(accumulateur);
 	}
 
-	// méthode permettant de changer la valeur de la pile
+	
+	// Méthode permettant de changer l'affichage de la pile
 	public void change(List<Double> stackData) {
 		view.change(stackData);
 	}
 
+	
+	// Gestion des boutons
 	private class ButtonHandler implements EventHandler<ActionEvent> {
 
 		/**
@@ -57,16 +58,15 @@ public class CalculatorControler implements CalculatorControlerInterface {
 		public void handle(ActionEvent event) {
 			Button source = (Button) event.getSource();
 			String buttonText = source.getText();
-
 			String accumulateur = view.getAccumulateur();
 
-			// Le switch permet de différencier les actions de chaque boutons
+			
+			// Le switch permet de différencier les actions de chaque bouton
 			switch (buttonText) {
 
 			/**
-			 * Pour les boutons des numéros de 0 à 9 et du point symbolisant la virgule,
-			 * réalise la même action. Qui va transformer la valeur du bouton en texte et
-			 * rajouter à la suite chaque valeur
+			 * Les boutons de 0 à 9 et du point réalisent la même action. Ils permettent de
+			 * rentrer leur valeur dans l'accumulateur sous type de String.
 			 */
 			case "1":
 			case "2":
@@ -79,64 +79,64 @@ public class CalculatorControler implements CalculatorControlerInterface {
 			case "9":
 			case "0":
 			case ".":
+				/*
+				 * On ajoute à la suite chaque valeur dans l'accumulateur tant que le bouton
+				 * push n'est pas cliqué
+				 */
 				change(buttonText);
 				break;
 
-			/**
-			 * L'action réaliser est de push dans l'accumulateur les valeurs rentrer avec
-			 * les boutons précédent
-			 */
+				
+			// Push
 			case "push":
-
+				// Vérification de si l'accumulateur est vide, pour éviter les erreurs
 				if (!accumulateur.isEmpty()) {
+					/*
+					 * Changement de type de l'accumulateur (String -> Double) Puis l'opérande est
+					 * push dans la pile
+					 */
 					model.push(Double.parseDouble(accumulateur));
+					// On efface l'accumulateur pour laisser place au prochain opérande
 					view.clearAccumulateur();
+					// Affichage de l'opérande dans la pile
 					change(model.getOperandStack());
 				}
 				break;
 
-			// L'action réaliser est l'addition
+				
+			// Addition
 			case "+":
-				// Fait appel à la méthode add défini dans model
+				// Fait appel à la méthode add() définie dans CalculatorModel
 				model.add();
-				// change la valeur dans l'accumulateur avec le résultat de l'addition
+				// Après avoir réalisé l'opération on affiche le changement au sein de la pile
 				change(model.getOperandStack());
 				break;
 
-			/**
-			 * Les actions suivantes sont similaires à celle de l'addition dans l'ensemble.
-			 * De la forme suivantes: Faire appel à une méthode dans model Change la valeur
-			 * dans l'accumulateur/pile (View)
-			 */
-
-			// L'action réaliser est la soustraction
+			// Soustraction
 			case "-":
 				model.subtract();
 				change(model.getOperandStack());
 				break;
 
-			// L'action réaliser est la multiplication
+			// Multiplication
 			case "*":
 				model.multiply();
 				change(model.getOperandStack());
 				break;
 
-			// L'action réaliser est la division
+			// Division
 			case "/":
 				model.divide();
 				change(model.getOperandStack());
 				break;
 
-			/**
-			 * L'action réaliser est d'échanger la derniere valeur ajouter dans la pile avec
-			 * l'avant derniere
-			 */
+			// Echange la derniere valeur ajoutée dans la pile avec l'avant derniere
 			case "<>":
 				model.swap();
 				change(model.getOperandStack());
 				break;
 
-			// L'action réaliser est de supprimer la derniere valeur ajouter dans la pile
+			// Suppression de la derniere valeur ajoutée dans la pile
 			case "drop":
 				// vérifie si la pile est vide ou non, pour évider les erreurs
 				if (!model.getOperandStack().isEmpty()) {
@@ -145,7 +145,7 @@ public class CalculatorControler implements CalculatorControlerInterface {
 				}
 				break;
 
-			// L'action réaliser est de vider totalement la pile
+			// Vidage de la pile
 			case "C":
 				if (!model.getOperandStack().isEmpty()) {
 					model.clearStack();
@@ -153,18 +153,17 @@ public class CalculatorControler implements CalculatorControlerInterface {
 				}
 				break;
 
-			/**
-			 * L'action réaliser est de supprimer la derniere valeur mise dans
-			 * l'accumulateur de la calculatrice
-			 */
+				
+			// Suppression de la derniere valeur mise dans l'accumulateur de la calculatrice
 			case "<-":
-				// vérifie si l'accumulateur est vide ou non, pour évider les erreurs
+				// Vérification de si l'accumulateur est vide, pour éviter les erreurs
 				if (!accumulateur.isEmpty()) {
-					// Créer une nouvelle valeur de l'accumulateuir en soustrayant le dernier caractère rajouté
+					// Création d'une nouvelle valeur de l'accumulateur en soustrayant le dernier
+					// caractère ajouté
 					String newAccumulateur = accumulateur.substring(0, accumulateur.length() - 1);
-					//Vide l'accumulateur en appelant la méthode dans view
+					// Vidage de l'accumulateur en appelant la méthode dans view
 					view.clearAccumulateur();
-					//Change avec la nouvelle valeur 
+					// Affichage de la nouvelle valeur de l'accumulateur
 					change(newAccumulateur);
 				}
 			}

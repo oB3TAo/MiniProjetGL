@@ -1,6 +1,9 @@
-//Clément GABON et Loïc Lainé
-package model;
+/**
+ * Partie model du programme 
+ * par Clément Gabon & Loïc Lainé
+ */
 
+package model;
 import java.util.Stack;
 
 //Modèle de la calculatrice
